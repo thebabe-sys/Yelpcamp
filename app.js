@@ -25,7 +25,7 @@ const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 
-const dbUrl = 'mongodb://127.0.0.1:27017/yelp-camp';
+const dbUrl = process.env.DB_URL;
 //process.env.DB_URL || 'mongodb://127.0.0.1:27017/yelp-camp';
 
 mongoose.connect(dbUrl);
@@ -52,7 +52,7 @@ app.use(mongoSanitize({
     replaceWith: '_'
 }));
 
-const secret ='thisshouldbeabettersecret';
+const secret = process.env.SECRET;
 // process.env.SECRET || 'thisshouldbeabettersecret';
 
 const store =  new mongoDBStore({
@@ -123,7 +123,7 @@ app.use(
                 "'self'",
                 "blob:",
                 "data:",
-                "https://res.cloudinary.com/dxcaulmn1/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
+                "https://res.cloudinary.com/dxcaulmn1/", 
                 "https://images.unsplash.com/",
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
